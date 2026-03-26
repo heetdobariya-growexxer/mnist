@@ -1,5 +1,5 @@
 import streamlit as st
-import cv2
+# import cv2  # Removed - causes issues in cloud deployments
 import torch
 import torch.nn as nn
 import torchvision.transforms as transforms

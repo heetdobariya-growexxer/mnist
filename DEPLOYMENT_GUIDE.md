@@ -19,6 +19,22 @@ streamlit run streamlit_app.py
 
 This will open the app in your browser at `http://localhost:8501`
 
+## Cloud Deployment
+
+### Streamlit Cloud
+1. Push this repository to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your GitHub repo
+4. Deploy!
+
+**Important**: The `packages.txt` file installs system dependencies needed for OpenCV in cloud environments.
+
+### Alternative: Use Headless OpenCV
+If you still need OpenCV functionality, use:
+```bash
+pip install opencv-python-headless
+```
+
 ## Features
 
 ✨ **Upload handwritten digit images** - Support for JPG, PNG, BMP, GIF formats
@@ -37,9 +53,13 @@ This will open the app in your browser at `http://localhost:8501`
 
 ## Troubleshooting
 
-**"Model file not found"** 
+**"Model file not found"**
 - Ensure you've trained the model first by running all cells in the notebook
 - The model should be saved as `CNN_MNIST.pth` in the same directory
+
+**OpenCV GUI Error (libGL.so.1)**
+- This app now uses headless OpenCV to avoid GUI dependency issues
+- If you need full OpenCV, add `packages.txt` to your deployment
 
 **Port already in use**
 ```bash
@@ -51,47 +71,13 @@ streamlit run streamlit_app.py --server.port 8502
 pip install --upgrade -r requirements.txt
 ```
 
-## Alternative Deployments
+## Files Overview
 
-### Option 1: Web API with Flask
-```python
-from flask import Flask, request, jsonify
-import torch
-from PIL import Image
-
-app = Flask(__name__)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    file = request.files['image']
-    image = Image.open(file)
-    # ... prediction logic
-    return jsonify({'prediction': result})
-```
-
-### Option 2: Docker Container
-Create a `Dockerfile`:
-```dockerfile
-FROM python:3.9
-WORKDIR /app
-COPY . /app
-RUN pip install -r requirements.txt
-EXPOSE 8501
-CMD ["streamlit", "run", "streamlit_app.py"]
-```
-
-Then build and run:
-```bash
-docker build -t mnist-classifier .
-docker run -p 8501:8501 mnist-classifier
-```
-
-### Option 3: Cloud Deployment (HuggingFace Spaces)
-1. Push this repository to GitHub
-2. Go to https://huggingface.co/spaces
-3. Create a new space with Streamlit
-4. Connect your GitHub repo
-5. Your app will be live!
+- `streamlit_app.py` - Main Streamlit application
+- `requirements.txt` - Python dependencies
+- `packages.txt` - System dependencies for cloud deployment
+- `CNN_MNIST.pth` - Trained model weights
+- `DEPLOYMENT_GUIDE.md` - This guide
 
 ---
 
