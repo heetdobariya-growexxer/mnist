@@ -27,7 +27,7 @@ This will open the app in your browser at `http://localhost:8501`
 3. Connect your GitHub repo
 4. Deploy!
 
-**Important**: The `packages.txt` file installs system dependencies needed for OpenCV in cloud environments.
+**Note**: No `packages.txt` needed since we use `opencv-python-headless` which is self-contained.
 
 ### Alternative: Use Headless OpenCV
 If you still need OpenCV functionality, use:
@@ -74,8 +74,7 @@ pip install --upgrade -r requirements.txt
 ## Files Overview
 
 - `streamlit_app.py` - Main Streamlit application
-- `requirements.txt` - Python dependencies
-- `packages.txt` - System dependencies for cloud deployment
+- `requirements.txt` - Python dependencies (uses opencv-python-headless)
 - `CNN_MNIST.pth` - Trained model weights
 - `DEPLOYMENT_GUIDE.md` - This guide
 
